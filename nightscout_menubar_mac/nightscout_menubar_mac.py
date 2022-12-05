@@ -12,7 +12,7 @@ class NightscoutMenuBarApp(object):
         self.config = {
             "app_name": "Nightscout menu bar",
             "interval": 180,
-            "ns_url": "https://endafarrell-nightscout.herokuapp.com",
+            "ns_url": "https://ns.cormac.xyz",
         }
         self.app = rumps.App(self.config["app_name"])
         self.timer = rumps.Timer(self.on_update, self.config["interval"])
@@ -32,6 +32,7 @@ class NightscoutMenuBarApp(object):
             j = resp.json()
             bg = j["bgs"][0]
             sgv = bg["sgv"]
+            delta = bg["bgdelta"]
             direction = bg["direction"]
             direction = {
                 "DoubleUp": "⇈",
@@ -60,10 +61,10 @@ class NightscoutMenuBarApp(object):
                 9: "\N{CIRCLED DIGIT NINE}",
             }.get(mins, mins)
             if age != mins:
-                title = f"{age} {sgv}{direction}"
+                title = f"{age} {sgv} {delta}{direction}"
             else:
                 if mins < 20:
-                    title = f"{age}:{sgv}{direction}"
+                    title = f"{age}:{sgv} {delta}{direction}"
                 else:
                     title = f"{mins} ago"
         except BaseException:
