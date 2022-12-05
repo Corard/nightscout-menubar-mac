@@ -11,7 +11,7 @@ class NightscoutMenuBarApp(object):
     def __init__(self):
         self.config = {
             "app_name": "Nightscout menu bar",
-            "interval": 180,
+            "interval": 30,
             "ns_url": "https://ns.cormac.xyz",
         }
         self.app = rumps.App(self.config["app_name"])
